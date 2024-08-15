@@ -1,7 +1,14 @@
+"use client"
 import { useEffect, useState } from "react"
 
 export function useLocalStorage<T>(key: string, initialValue: T | (() => T)) {
   const [value, setValue] = useState<T>(() => {
+
+    if (typeof window === "undefined") {
+      // Returning initial value during SSR
+      return typeof initialValue === "function" ? (initialValue as () => T)() : initialValue;
+    }
+    
     const jsonValue = localStorage.getItem(key)
     if (jsonValue != null) return JSON.parse(jsonValue)
 

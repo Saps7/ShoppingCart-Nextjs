@@ -13,7 +13,9 @@ function Navbar() {
                 <Link href="/" className="flex-shrink-0">
                     <Image width="100" height="20" src="nav-logo.svg" alt="Nav logo" />
                 </Link>
-                <h1 className="text-xl mr-auto hidden md:flex font-bold text-red-500">Cross Country Shoes</h1>
+                <Link href="/" className="mr-auto hidden md:flex">
+                    <h1 className="text-xl font-bold text-red-500">Cross Country Shoes</h1>
+                </Link>
 
                 {/* Search */}
                 <div className="w-full h-10 max-w-xs xl:max-w-md 2xl:max-w-lg bg-gray-100 rounded-md hidden sm:flex items-center">

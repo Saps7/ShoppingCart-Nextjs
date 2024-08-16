@@ -7,18 +7,21 @@ import CartSummary from "@/components/CartSummary";
 function CartPage() {
     const { cartItems } = useShoppingCart();
 
+    //Total of MRP of all products in cart
     const subTotal = cartItems.reduce((total, cartItem) => {
                                     const item = products.find((product) => product.id === cartItem.id);
                                     return total + (item?.price || 0) * cartItem.quantity;
                                 }, 0);
     
+    //Total of all product level discounts (excluding payment/ coupon discounts)
     const totalDiscount = cartItems.reduce((total, cartItem) => {
                                         const item = products.find((product) => product.id === cartItem.id);
                                         const discount = item?.price > 0 ? (item.price * item.discount / 100) : 0;
                                         return total + discount * cartItem.quantity;
                                     }, 0);
-                                
-    const total = subTotal - totalDiscount;
+    
+    //Discounted total of products                               
+    const discountedTotal = subTotal - totalDiscount;
 
     return (
         <div className="py-10 relative">
@@ -37,7 +40,7 @@ function CartPage() {
                     <CartItem key={cartItem.id} {...cartItem} />
                 ))}
 
-                <CartSummary subTotal={subTotal} totalDiscount={totalDiscount} total={total} />
+                <CartSummary subTotal={subTotal} productDiscount={totalDiscount} discountedTotal={discountedTotal} />
                 
             </div>
         </div>

@@ -27,7 +27,7 @@ function CartItem({ id, quantity }: CartItemProps) {
                         {product.name}
                     </h5>
                     <div className="flex flex-col">
-                        <h4 className="font-medium text-xl leading-8 text-red-500 max-[550px]:text-center">
+                        <h4 className="font-medium text-xl leading-8 text-gray-900 max-[550px]:text-center">
                             {formatCurrency(discountedPrice)}
                         </h4>
                         <h4 className="font-medium text-xl leading-8 line-through text-gray-500 max-[550px]:text-center">
@@ -81,7 +81,7 @@ function CartItem({ id, quantity }: CartItemProps) {
                     </button>
                 </div>
 
-                <h6 className="text-red-500 font-manrope font-bold text-2xl leading-9 w-full max-w-[176px] flex items-center mx-auto mt-4">
+                <h6 className="text-gray-900 font-manrope font-bold text-2xl leading-9 w-full max-w-[176px] flex items-center mx-auto mt-4">
                     <span className="lg:hidden">Total: </span>
                     {formatCurrency(discountedPrice * quantity)}
                 </h6>

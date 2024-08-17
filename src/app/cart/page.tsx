@@ -16,7 +16,7 @@ function CartPage() {
     //Total of all product level discounts (excluding payment/ coupon discounts)
     const totalDiscount = cartItems.reduce((total, cartItem) => {
                                         const item = products.find((product) => product.id === cartItem.id);
-                                        const discount = item?.price > 0 ? (item.price * item.discount / 100) : 0;
+                                        const discount = (item?.price !== undefined && item?.price > 0) ? (item.price * item.discount / 100) : 0;
                                         return total + discount * cartItem.quantity;
                                     }, 0);
     

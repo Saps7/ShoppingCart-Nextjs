@@ -3,6 +3,7 @@ import { useShoppingCart } from "@/context/ShoppingCartContext";
 import products from "@/data/products.json";
 import CartItem from "@/components/CartItem";
 import CartSummary from "@/components/CartSummary";
+import EmptyCart from "@/components/EmptyCart";
 
 function CartPage() {
     const { cartItems } = useShoppingCart();
@@ -24,7 +25,9 @@ function CartPage() {
     const discountedTotal = subTotal - totalDiscount;
 
     return (
-        <div className="py-10 relative">
+        <>
+        {cartItems.length > 0 ?
+            (<div className="py-10 relative">
             <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
                 <h2 className="title font-manrope font-bold text-4xl leading-10 mb-8 text-center text-black">Shopping Cart
                 </h2>
@@ -44,6 +47,12 @@ function CartPage() {
                 
             </div>
         </div>
+        ) : (
+            <EmptyCart />
+        )
+        
+        }
+        </>
     )
 }
 

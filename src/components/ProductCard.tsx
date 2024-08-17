@@ -22,8 +22,8 @@ export default function ProductCard({ id, name, price, imgUrl, discount, inStock
     if (quantity < inStock)
         increaseCartQuantity(id);
     else {
-        toast.warn("You can't order any more quantity of this item!", {
-            position: "top-right"
+        toast.warn("Sorry, we have limited quantity available for this item!", {
+            position: "bottom-center"
         });
     }
 }

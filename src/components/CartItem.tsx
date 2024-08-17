@@ -21,8 +21,8 @@ function CartItem({ id, quantity }: CartItemProps) {
         if (quantity < product.inStock)
             increaseCartQuantity(id);
         else {
-            toast.warn("You can't order any more quantity of this item!", {
-                position: "top-right"
+            toast.warn("Sorry, we have limited quantity available for this item!", {
+                position: "bottom-center"
             });
         }
     }

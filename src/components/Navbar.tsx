@@ -14,7 +14,7 @@ function Navbar() {
                     <Image width="100" height="20" src="nav-logo.svg" alt="Nav logo" />
                 </Link>
                 <Link href="/" className="mr-auto hidden md:flex">
-                    <h1 className="text-xl font-bold text-red-500">Cross Country Shoes</h1>
+                    <h1 className="text-xl font-bold text-red-500">Cross Country Sneakers</h1>
                 </Link>
 
                 {/* Search */}

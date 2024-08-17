@@ -7,7 +7,7 @@ import { ShoppingCartProvider } from "@/context/ShoppingCartContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Empire of Sneakers",
+  title: "Cross Country Sneakers",
   description: "Your ultimate Sneaker destination",
 };
 

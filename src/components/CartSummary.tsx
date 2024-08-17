@@ -1,31 +1,46 @@
 "use client"
 import { useState } from "react";
 import { formatCurrency } from "@/lib/formatCurrency";
-import cardOptions from "@/data/coupons.json"
+import cardOptions from "@/data/coupons.json";
+import CheckoutModal from "@/components/CheckoutModal"
 
 type CartSummaryProps = {
-    subTotal: number,
-    totalDiscount: number,
-    discountedTotal: number,
+    subTotal: number;
+    productDiscount: number;
+    discountedTotal: number;
 }
 
 function CartSummary({ subTotal, productDiscount, discountedTotal }: CartSummaryProps) {
+    //Storing id of selected coupon
     const [selectedCard, setSelectedCard] = useState(0);
+    //Flag to show coupons
     const [showCoupon, setShowCoupon] = useState(false);
     const [couponDiscount, setCouponDiscount] = useState(0)
     const [total, setTotal] = useState(discountedTotal);
+    //Checkout modal opening flag
+    const [open, setOpen] = useState(false);
 
     const isSelected = (id: number) => selectedCard === id;
 
     const couponClickHandler = (id) => {
-        setSelectedCard(id);
-
-        const coupon = cardOptions.filter(card => card.id === id)[0];
-        //Checking for type of discount and calculating it on cartvalue post product level discounts
-        const discount = coupon.discountType === 'amount' ? coupon.discount : discountedTotal * coupon.discount / 100;
-        setCouponDiscount(discount);
-        //Final cart value post all discounts
-        setTotal(discountedTotal - discount);
+        //Checking whether a coupon has been clicked twice and if so then disabling it
+        if(id === selectedCard)
+        {
+            setSelectedCard(0);
+            setCouponDiscount(0);
+            setTotal(discountedTotal);
+        }
+        else
+        {
+            setSelectedCard(id);
+            
+            const coupon = cardOptions.filter(card => card.id === id)[0];
+            //Checking for type of discount and calculating it on cartvalue post product level discounts
+            const discount = coupon.discountType === 'amount' ? coupon.discount : discountedTotal * coupon.discount / 100;
+            setCouponDiscount(discount);
+            //Final cart value post all discounts
+            setTotal(discountedTotal - discount);
+        }
     }
 
     return (
@@ -73,10 +88,13 @@ function CartSummary({ subTotal, productDiscount, discountedTotal }: CartSummary
                         Add Coupon Code
                     </span>
                 </button>
-                <button className="rounded-full w-full max-w-[280px] py-4 text-center justify-center items-center bg-red-500 font-semibold text-lg text-white flex transition-all duration-500 hover:bg-red-700">
+                <button className="rounded-full w-full max-w-[280px] py-4 text-center justify-center items-center bg-white font-semibold 
+                            text-lg text-gray-900 border-gray-900 border-2 flex transition-all duration-500 hover:bg-gray-900 hover:text-white"
+                    onClick={() => setOpen(!open)}
+                >
                     Checkout
-                    <svg className="ml-2" xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
-                        <path d="M8.75324 5.49609L14.2535 10.9963L8.75 16.4998" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                    <svg className="ml-1" xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
+                        <path d="M8.75324 5.49609L14.2535 10.9963L8.75 16.4998" stroke="black" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </button>
             </div>
@@ -102,6 +120,10 @@ function CartSummary({ subTotal, productDiscount, discountedTotal }: CartSummary
                         ))}
                     </div>
                 </div>
+            }
+
+            {open && 
+                <CheckoutModal open setOpen={setOpen} total={total} />
             }
         </>
     )

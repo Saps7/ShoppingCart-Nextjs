@@ -11,7 +11,7 @@
     {
         "id": 2,
         "title": "Flat 500 off",
-        "description": "Flat 1000 off on paying using UPI",
+        "description": "Flat 500 off on paying using UPI",
         "color": "border-green-500",
         "bg": "bg-green-100",
         "discountType": "amount",

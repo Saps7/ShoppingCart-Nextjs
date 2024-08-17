@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react";
-import { formatCurrency } from "@/lib/formatCurrency";
+import formatCurrency from "@/lib/formatCurrency";
 import cardOptions from "@/data/coupons.json";
 import CheckoutModal from "@/components/CheckoutModal"
 
@@ -24,16 +24,14 @@ function CartSummary({ subTotal, productDiscount, discountedTotal }: CartSummary
 
     const couponClickHandler = (id: number) => {
         //Checking whether a coupon has been clicked twice and if so then disabling it
-        if(id === selectedCard)
-        {
+        if (id === selectedCard) {
             setSelectedCard(0);
             setCouponDiscount(0);
             setTotal(discountedTotal);
         }
-        else
-        {
+        else {
             setSelectedCard(id);
-            
+
             const coupon = cardOptions.filter(card => card.id === id)[0];
             //Checking for type of discount and calculating it on cartvalue post product level discounts
             const discount = coupon.discountType === 'amount' ? coupon.discount : discountedTotal * coupon.discount / 100;
@@ -122,7 +120,7 @@ function CartSummary({ subTotal, productDiscount, discountedTotal }: CartSummary
                 </div>
             }
 
-            {open && 
+            {open &&
                 <CheckoutModal open setOpen={setOpen} total={total} />
             }
         </>

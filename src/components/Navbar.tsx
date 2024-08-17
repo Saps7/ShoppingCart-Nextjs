@@ -19,9 +19,6 @@ function Navbar() {
 
                 {/* Search */}
                 <div className="w-full h-10 max-w-xs xl:max-w-md 2xl:max-w-lg bg-gray-100 rounded-md hidden sm:flex items-center">
-                    {/* <select className="bg-transparent uppercase font-bold text-sm p-4 mr-4">
-                        <option>all categories</option>
-                    </select> */}
                     <input
                         className="w-full h-full border-l border-gray-300 bg-transparent font-semibold text-md pl-4"
                         type="text"
@@ -64,14 +61,7 @@ function Navbar() {
                         </svg>
                     </Link>
                 </div>
-
-                {/* Cart count */}
-                {/* <div className="ml-4 hidden sm:flex flex-col font-bold">
-                    <span className="text-xs text-gray-400">Your Cart</span>
-                    <span>$2,650.59</span>
-                </div> */}
             </div>
-
             <hr />
         </header>
 

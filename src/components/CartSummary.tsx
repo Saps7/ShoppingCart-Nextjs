@@ -22,7 +22,7 @@ function CartSummary({ subTotal, productDiscount, discountedTotal }: CartSummary
 
     const isSelected = (id: number) => selectedCard === id;
 
-    const couponClickHandler = (id) => {
+    const couponClickHandler = (id: number) => {
         //Checking whether a coupon has been clicked twice and if so then disabling it
         if(id === selectedCard)
         {

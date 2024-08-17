@@ -5,11 +5,11 @@ import React, { ReactNode } from "react";
 
 type ModalProps = {
     isOpen: boolean;
-    onClose: () => false;
+    onClose: () => void;
     children: ReactNode;
 }
 
-const Modal = ({ isOpen, onClose, children }) => {
+const Modal = ({ isOpen, onClose, children }: ModalProps) => {
     if (!isOpen) return null;
 
     return (

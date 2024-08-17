@@ -7,7 +7,7 @@ import { formatCurrency } from "@/lib/formatCurrency";
 type CheckoutModalProps = {
     open: boolean;
     setOpen: (open: boolean) => void;
-    total: Number;
+    total: number;
 }
 
 const CheckoutModal = ({ open, setOpen, total }: CheckoutModalProps) => {

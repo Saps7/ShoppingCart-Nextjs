@@ -1,13 +1,27 @@
 "use client"
 import { useState } from "react";
 import formatCurrency from "@/lib/formatCurrency";
-import cardOptions from "@/data/coupons.json";
-import CheckoutModal from "@/components/CheckoutModal"
+import Loading from "./UI/Loading";
+import CheckoutModal from "@/components/CheckoutModal";
+import useSWR from "swr";
+import clsx from 'clsx';
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 type CartSummaryProps = {
     subTotal: number;
     productDiscount: number;
     discountedTotal: number;
+}
+
+type CardProps = {
+    id: number;
+    title: string;
+    description: string;
+    color: string;
+    bg: string;
+    discountType: string;
+    discount: number;
 }
 
 function CartSummary({ subTotal, productDiscount, discountedTotal }: CartSummaryProps) {
@@ -19,6 +33,25 @@ function CartSummary({ subTotal, productDiscount, discountedTotal }: CartSummary
     const [total, setTotal] = useState(discountedTotal);
     //Checkout modal opening flag
     const [open, setOpen] = useState(false);
+
+
+    const {
+        data: cardOptions,
+        isLoading,
+        isError: error,
+    } = useSWR(
+        "/api/coupons",
+        fetcher,
+        { revalidateOnFocus: false, revalidateOnReconnect: false }
+    );
+
+    if (error) {
+        return <p>Failed to fetch</p>;
+    }
+
+    if (isLoading) {
+        return <Loading></Loading>;;
+    }
 
     const isSelected = (id: number) => selectedCard === id;
 
@@ -32,7 +65,7 @@ function CartSummary({ subTotal, productDiscount, discountedTotal }: CartSummary
         else {
             setSelectedCard(id);
 
-            const coupon = cardOptions.filter(card => card.id === id)[0];
+            const coupon = cardOptions.filter(( card : CardProps ) => card.id === id)[0];
             //Checking for type of discount and calculating it on cartvalue post product level discounts
             const discount = coupon.discountType === 'amount' ? coupon.discount : discountedTotal * coupon.discount / 100;
             setCouponDiscount(discount);
@@ -83,7 +116,7 @@ function CartSummary({ subTotal, productDiscount, discountedTotal }: CartSummary
                     onClick={() => setShowCoupon(!showCoupon)}
                 >
                     <span className="px-2 font-semibold text-lg leading-8 text-white">
-                        Add Coupon Code
+                        Add Coupon
                     </span>
                 </button>
                 <button className="rounded-full w-full max-w-[280px] py-4 text-center justify-center items-center bg-white font-semibold 
@@ -101,10 +134,14 @@ function CartSummary({ subTotal, productDiscount, discountedTotal }: CartSummary
                 //Coupons section
                 <div className="container mx-auto px-4 py-8">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        {cardOptions.map((card) => (
+                        {cardOptions.map((card : CardProps) => (
                             <div
                                 key={card.id}
-                                className={`relative border-2 ${card.color} rounded-lg p-6 cursor-pointer transition-all duration-300 transform hover:scale-105 ${isSelected(card.id) ? card.bg : 'bg-white'}`}
+                                className={clsx(
+                                    "relative border-2 rounded-lg p-6 cursor-pointer transition-all duration-300 transform hover:scale-105",
+                                    card.color,
+                                    isSelected(card.id) ? card.bg : 'bg-white'
+                                )}
                                 onClick={() => couponClickHandler(card.id)}
                                 tabIndex={0}
                                 role="checkbox"

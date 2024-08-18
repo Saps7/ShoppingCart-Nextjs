@@ -1,22 +1,52 @@
 "use client"
 import { useShoppingCart } from "@/context/ShoppingCartContext";
-import products from "@/data/products.json";
+import Loading from "@/components/UI/Loading";
 import CartItem from "@/components/CartItem";
 import CartSummary from "@/components/CartSummary";
 import EmptyCart from "@/components/EmptyCart";
+import useSWR from "swr";
+
+type ProductProps = {
+    id: number;
+    name: string;
+    price: number;
+    imgUrl: string;
+    discount: number;
+    inStock: number;
+}
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 function CartPage() {
+    const {
+        data: products,
+        isLoading,
+        isError: error,
+    } = useSWR(
+        "/api/products",
+        fetcher,
+        { revalidateOnFocus: false, revalidateOnReconnect: false }
+    );
+
+    if (error) {
+        return <p>Failed to fetch</p>;
+    }
+
+    if (isLoading) {
+        return <Loading></Loading>;
+    }
+
     const { cartItems } = useShoppingCart();
 
     //Total of MRP of all products in cart
     const subTotal = cartItems.reduce((total, cartItem) => {
-        const item = products.find((product) => product.id === cartItem.id);
+        const item = products.find((product : ProductProps) => product.id === cartItem.id);
         return total + (item?.price || 0) * cartItem.quantity;
     }, 0);
 
     //Total of all product level discounts (excluding payment/ coupon discounts)
     const totalDiscount = cartItems.reduce((total, cartItem) => {
-        const item = products.find((product) => product.id === cartItem.id);
+        const item = products.find((product : ProductProps) => product.id === cartItem.id);
         const discount = (item?.price !== undefined && item?.price > 0) ? (item.price * item.discount / 100) : 0;
         return total + discount * cartItem.quantity;
     }, 0);

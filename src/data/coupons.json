@@ -29,7 +29,7 @@
     {
         "id": 4,
         "title": "Flat 5% off",
-        "description": "Flat 5% off using ICICI Debit Cards",
+        "description": "Flat 5% off using ICICI Bank Debit Cards",
         "color": "border-orange-500",
         "bg": "bg-orange-100",
         "discountType": "%",

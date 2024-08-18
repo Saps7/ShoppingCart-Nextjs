@@ -10,7 +10,7 @@ type ProductProps = {
 }
 
 export default async function Home() {
-  const baseUrl = process.env.VERCEL_URL || 'http://localhost:3000';
+  const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000';
   const res = await fetch(`${baseUrl}/api/products`);
   const products = await res.json();
 

@@ -18,15 +18,23 @@ export default function ProductCard({ id, name, price, imgUrl, discount, inStock
   const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart } = useShoppingCart();
   const quantity = getItemQuantity(id);
 
+  //Adding an alert when 1st unit of product is added to cart
+  const handleAddToCart = () => {
+    increaseCartQuantity(id);
+    toast.success(`${name} has been added to your cart!`, {
+      position: "top-right"
+    })
+  }
+
   const handleIncrementCartQuantity = () => {
     if (quantity < inStock)
         increaseCartQuantity(id);
     else {
         toast.warn("Sorry, we have limited quantity available for this item!", {
-            position: "bottom-center"
+          position: "bottom-center"
         });
     }
-}
+  }
 
   return (
     <>
@@ -45,7 +53,7 @@ export default function ProductCard({ id, name, price, imgUrl, discount, inStock
           </div>
           {quantity === 0 ? (
             <button className="mt-4 relative inline-block text-lg group"
-              onClick={() => increaseCartQuantity(id)}
+              onClick={() => handleAddToCart()}
             >
               <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
                 <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>

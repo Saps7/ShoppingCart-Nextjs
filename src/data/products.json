@@ -38,6 +38,22 @@
       "discount": 10,
       "imgUrl": "/ProductImages/Red-AdidasShoe.jpg",
       "inStock": 5
+    },
+    {
+      "id": 6,
+      "name": "Pink Urban Sports Shoe",
+      "price": 1999,
+      "discount": 20,
+      "imgUrl": "/ProductImages/pink-shoe.jpg",
+      "inStock": 5
+    },
+    {
+      "id": 7,
+      "name": "Red Urban Casual Shoe",
+      "price": 1499,
+      "discount": 10,
+      "imgUrl": "/ProductImages/red-shoes.jpg",
+      "inStock": 2
     }
   ]
   

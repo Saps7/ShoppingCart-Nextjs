@@ -2,8 +2,7 @@
 "use client"
 import { useShoppingCart } from "@/context/ShoppingCartContext"
 import formatCurrency from "@/lib/formatCurrency";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 type ProductProps = {
   id: number;
@@ -88,7 +87,6 @@ export default function ProductCard({ id, name, price, imgUrl, discount, inStock
           )}
         </div>
       </div>
-      <ToastContainer />
     </>
   )
 }

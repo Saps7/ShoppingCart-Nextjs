@@ -2,8 +2,7 @@
 import { useShoppingCart } from "../context/ShoppingCartContext";
 import products from "@/data/products.json";
 import formatCurrency from "@/lib/formatCurrency";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 type CartItemProps = {
     id: number;
@@ -100,7 +99,6 @@ function CartItem({ id, quantity }: CartItemProps) {
                     </h6>
                 </div>
             </div>
-            <ToastContainer />
         </>
     )
 }

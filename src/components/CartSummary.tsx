@@ -38,7 +38,7 @@ function CartSummary({ subTotal, productDiscount, discountedTotal }: CartSummary
     const {
         data: cardOptions,
         isLoading,
-        isError: error,
+        error,
     } = useSWR(
         "/api/coupons",
         fetcher,

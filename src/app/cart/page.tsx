@@ -23,7 +23,7 @@ function CartPage() {
     const {
         data: products,
         isLoading,
-        isError: error,
+        error,
     } = useSWR(
         "/api/products",
         fetcher,

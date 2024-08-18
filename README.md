@@ -1,5 +1,5 @@
 ## Deployed App link:
-[ShoppingCart-Nextjs](https://shopping-cart-nextjs-6j05aoikp-saptarshi-senguptas-projects.vercel.app/)
+[ShoppingCart-Nextjs](https://shopping-cart-nextjs-41arhz0hh-saptarshi-senguptas-projects.vercel.app/)
 
 ## Getting Started/ Installation:
 

@@ -54,6 +54,14 @@
       "discount": 10,
       "imgUrl": "/ProductImages/red-shoes.jpg",
       "inStock": 2
+    },
+    {
+      "id": 8,
+      "name": "Green Nike Sports Shoe",
+      "price": 4999,
+      "discount": 15,
+      "imgUrl": "/ProductImages/green-nike.jpg",
+      "inStock": 4
     }
   ]
   

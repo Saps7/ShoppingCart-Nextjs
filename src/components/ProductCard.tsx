@@ -4,6 +4,7 @@ import { useShoppingCart } from "@/context/ShoppingCartContext"
 import formatCurrency from "@/lib/formatCurrency";
 import { toast } from "react-toastify";
 
+
 type ProductProps = {
   id: number;
   name: string;
@@ -21,7 +22,7 @@ export default function ProductCard({ id, name, price, imgUrl, discount, inStock
   const handleAddToCart = () => {
     increaseCartQuantity(id);
     toast.success(`${name} has been added to your cart!`, {
-      position: "top-right"
+      position: "top-center"
     })
   }
 
@@ -33,6 +34,13 @@ export default function ProductCard({ id, name, price, imgUrl, discount, inStock
           position: "bottom-center"
         });
     }
+  }
+
+  const handleRemoveFromCart = () => {
+    removeFromCart(id);
+    toast.warn(`${name} has been removed from the cart!`, {
+      position: "bottom-center"
+    });
   }
 
   return (
@@ -78,7 +86,7 @@ export default function ProductCard({ id, name, price, imgUrl, discount, inStock
                 </button>
               </div>
               <button className="rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 text-lg border-red-600 text-red-600 text-white"
-                onClick={() => removeFromCart(id)}
+                onClick={() => handleRemoveFromCart()}
               >
                 <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-red-600 top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
                 <span className="relative text-red-600 transition duration-300 group-hover:text-white ease">Remove</span>

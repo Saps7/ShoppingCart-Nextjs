@@ -18,6 +18,8 @@ type ProductProps = {
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 function CartPage() {
+    const { cartItems } = useShoppingCart();
+
     const {
         data: products,
         isLoading,
@@ -36,17 +38,15 @@ function CartPage() {
         return <Loading></Loading>;
     }
 
-    const { cartItems } = useShoppingCart();
-
     //Total of MRP of all products in cart
     const subTotal = cartItems.reduce((total, cartItem) => {
-        const item = products.find((product : ProductProps) => product.id === cartItem.id);
+        const item = products.find((product: ProductProps) => product.id === cartItem.id);
         return total + (item?.price || 0) * cartItem.quantity;
     }, 0);
 
     //Total of all product level discounts (excluding payment/ coupon discounts)
     const totalDiscount = cartItems.reduce((total, cartItem) => {
-        const item = products.find((product : ProductProps) => product.id === cartItem.id);
+        const item = products.find((product: ProductProps) => product.id === cartItem.id);
         const discount = (item?.price !== undefined && item?.price > 0) ? (item.price * item.discount / 100) : 0;
         return total + discount * cartItem.quantity;
     }, 0);
